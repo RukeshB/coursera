@@ -38,7 +38,7 @@ public class Part1 {
         FileResource fr = new FileResource();
         CSVParser parser = fr.getCSVParser();
         CSVRecord coldestHour = coldestHourInFile(parser);
-        System.out.println("the coldest tempeture is "+coldestHour.get("TemperatureF")+" at "+ coldestHour.get("TimeEST"));
+        System.out.println("the coldest tempeture is "+coldestHour.get("TemperatureF"));
     }
     
     public double averageTemperatureInFile (CSVParser parser)
@@ -106,25 +106,32 @@ public class Part1 {
         CSVRecord lowestHumidity = null;
         for(CSVRecord record : parser)
         {
-            if(lowestHumidity == null )
-            {
-                lowestHumidity = record;
-            }
-            else
-            {
-                String humidity =record.get("Humidity");
-                if(humidity!="N/A")
+            String humidity =record.get("Humidity");
+                if(humidity.contains("N/A"))
                 {
-                    double currenttemp = Double.parseDouble(humidity);
-                    double coldesttemp = Double.parseDouble(lowestHumidity.get("Humidity"));
-                    if(coldesttemp > currenttemp)
-                    {
-                        lowestHumidity = record;
+                    //System.out.println(humidity);
+                    continue;
+                }
+                else{
+                    if(lowestHumidity == null )
+                        {
+                            lowestHumidity = record;
+                        }
+                        else
+                        {
+                         
+                                double currenttemp = Double.parseDouble(humidity);
+                                double lowestHumiditytemp = Double.parseDouble(lowestHumidity.get("Humidity"));
+                                if(lowestHumiditytemp > currenttemp)
+                                {
+                                    lowestHumidity = record;
+                                }
+                           
+                            
+                        }
                     }
                 }
-                
-            }
-        }
+            
         return lowestHumidity;
     }
     
@@ -139,21 +146,22 @@ public class Part1 {
     public String fileWithColdestTemperature()
     {
         File temp=null;
-        double coldestHour = -1;
+        double coldestHour = 100;
         DirectoryResource dr=new DirectoryResource();
         for(File f : dr.selectedFiles())
         {
              FileResource fr = new FileResource(f);
              CSVParser parser= fr.getCSVParser();
+             
              double currentcoldest = Double.parseDouble(coldestHourInFile(parser).get("TemperatureF"));
-             if(coldestHour < 0)
+             if(coldestHour >= 100)
              {
                  coldestHour = currentcoldest;
                  temp=f;
              }
              else
              {
-                 if(currentcoldest < coldestHour)
+                 if(currentcoldest < coldestHour && currentcoldest > 0)
                  {
                      coldestHour = currentcoldest;
                      temp=f;
@@ -164,7 +172,6 @@ public class Part1 {
         return temp.getName();
     }
     
-    
     public void testFileWithColdestTemperature()
     {
         String FileName = fileWithColdestTemperature();
@@ -173,7 +180,56 @@ public class Part1 {
         FileResource fr = new FileResource("E:\\git\\coursera\\Java Programming Solving Problems with Software\\CSVSecondAssignment\\nc_weather\\2014\\"+FileName);
         CSVParser parser = fr.getCSVParser();
         CSVRecord coldestHour = coldestHourInFile(parser);
-        System.out.println("the coldest tempeture is "+coldestHour.get("TemperatureF")+" at "+ coldestHour.get("TimeEST"));
+        System.out.println("the coldest tempeture is "+coldestHour.get("TemperatureF"));
+        
+    }
+    
+    public String fileWithlowestHumidity()
+    {
+        File temp=null;
+        double lowestHumidity = -1;
+        DirectoryResource dr=new DirectoryResource();
+        for(File f : dr.selectedFiles())
+        {
+             FileResource fr = new FileResource(f);
+             CSVParser parser= fr.getCSVParser();
+             String humidity =lowestHumidityInFile(parser).get("Humidity");
+                if(humidity=="N/A")
+                {
+                    humidity="-1";
+                }
+             double currentHumidity = Double.parseDouble(humidity);
+             if(lowestHumidity == 13)
+             {
+                 System.out.println(lowestHumidityInFile(parser).get("TimeEST"));
+                }
+             if(lowestHumidity < 0)
+             {
+                 lowestHumidity = currentHumidity;
+                 temp=f;
+             }
+             else
+             {
+                 if(currentHumidity < lowestHumidity)
+                 {
+                     lowestHumidity = currentHumidity;
+                     temp=f;
+                    }
+             }
+        }
+        System.out.println(temp);
+        return temp.getName();
+    }
+    
+    public void testFileWithlowestHumidity()
+    {
+        String FileName = fileWithlowestHumidity();
+        System.out.println("file Name With Lowest Humidity is "+ FileName);
+        //String filename = "nc_weather\2014"
+        FileResource fr = new FileResource("E:\\git\\coursera\\Java Programming Solving Problems with Software\\CSVSecondAssignment\\nc_weather\\2014\\"+FileName);
+        CSVParser parser = fr.getCSVParser();
+        CSVRecord lowestHumidity = lowestHumidityInFile(parser);
+        System.out.println("the Lowest Humidity is "+lowestHumidity.get("Humidity")+" at "+ lowestHumidity.get("TimeEST"));
         
     }
     
