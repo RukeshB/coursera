@@ -71,9 +71,9 @@ public class Part1 {
         CSVParser parser = fr.getCSVParser();
         //System.out.println(countryInfo(parser,"Nauru"));
         //parser = fr.getCSVParser();
-        //listExportersTwoProducts(parser,"gold","diamonds");
+        //listExportersTwoProducts(parser,"cotton","flowers");
         //parser = fr.getCSVParser();
-        //System.out.println(numberOfExporters(parser, "gold"));
+        //System.out.println(numberOfExporters(parser, "cocoa"));
         //parser = fr.getCSVParser();
         bigExporters(parser,"$999,999,999,999");
     }

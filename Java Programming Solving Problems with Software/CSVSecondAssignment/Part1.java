@@ -140,7 +140,7 @@ public class Part1 {
         FileResource fr = new FileResource();
         CSVParser parser = fr.getCSVParser();
         CSVRecord lowestHumidity = lowestHumidityInFile(parser);
-        System.out.println("the Lowest Humidity is "+lowestHumidity.get("Humidity")+" at "+ lowestHumidity.get("TimeEST"));
+        System.out.println("the Lowest Humidity is "+lowestHumidity.get("Humidity")+" at "+ lowestHumidity.get("DateUTC"));
     }
     
     public String fileWithColdestTemperature()
@@ -177,7 +177,7 @@ public class Part1 {
         String FileName = fileWithColdestTemperature();
         System.out.println("file Name With Coldest Temperature is "+ FileName);
         //String filename = "nc_weather\2014"
-        FileResource fr = new FileResource("E:\\git\\coursera\\Java Programming Solving Problems with Software\\CSVSecondAssignment\\nc_weather\\2014\\"+FileName);
+        FileResource fr = new FileResource("E:\\git\\coursera\\Java Programming Solving Problems with Software\\CSVSecondAssignment\\nc_weather\\2013\\"+FileName);
         CSVParser parser = fr.getCSVParser();
         CSVRecord coldestHour = coldestHourInFile(parser);
         System.out.println("the coldest tempeture is "+coldestHour.get("TemperatureF"));
@@ -226,10 +226,10 @@ public class Part1 {
         String FileName = fileWithlowestHumidity();
         System.out.println("file Name With Lowest Humidity is "+ FileName);
         //String filename = "nc_weather\2014"
-        FileResource fr = new FileResource("E:\\git\\coursera\\Java Programming Solving Problems with Software\\CSVSecondAssignment\\nc_weather\\2014\\"+FileName);
+        FileResource fr = new FileResource("E:\\git\\coursera\\Java Programming Solving Problems with Software\\CSVSecondAssignment\\nc_weather\\2013\\"+FileName);
         CSVParser parser = fr.getCSVParser();
         CSVRecord lowestHumidity = lowestHumidityInFile(parser);
-        System.out.println("the Lowest Humidity is "+lowestHumidity.get("Humidity")+" at "+ lowestHumidity.get("TimeEST"));
+        System.out.println("the Lowest Humidity is "+lowestHumidity.get("Humidity")+" at "+ lowestHumidity.get("DateUTC"));
         
     }
     
