@@ -41,6 +41,8 @@ public class BabyBirths {
         System.out.println("total births = " + totalBirths);
         System.out.println("female girls = " + totalGirls);
         System.out.println("male boys = " + totalBoys);
+        System.out.println("number of girls' names = "+ countGirlsName);
+        System.out.println("number of Boys names = "+ countBoysName);
     }
 
     public int getRank(int year,String name, String gender)
@@ -147,7 +149,7 @@ public class BabyBirths {
            
     public int getTotalBirthsRankedHigher(String name,String gender,int year)
     {
-        String Filepath = "data/yob"+year+"short.csv";
+        String Filepath = "data/yob"+year+".csv";
         int totalBirth = 0;
         FileResource fr = new FileResource(Filepath);
         for(CSVRecord rec : fr.getCSVParser(false))
@@ -166,13 +168,13 @@ public class BabyBirths {
     
     public void test () {
         //FileResource fr = new FileResource();
-        //FileResource fr = new FileResource();
-        //totalBirths(fr);
-        //System.out.println(getRank(2012,"Mason", "M"));
-        //System.out.println(getName(2012,2, "M"));
-        //System.out.println("Isabella born in 2012 would be "+whatIsNameInYear(2012,2014,"Isabella","F")+" if she was born in 2014.");
-        //System.out.println(yearOfHighestRank("Mason","M"));
-        //System.out.println(getAverageRank("Mason","M"));
-        System.out.println(getTotalBirthsRankedHigher("Mason","M",2012));
+        FileResource fr = new FileResource();
+        totalBirths(fr);
+        //System.out.println(getRank(1971,"Frank", "M"));
+        //System.out.println(getName(1982,450, "M"));
+        //System.out.println("Owen born in 2012 would be "+whatIsNameInYear(1974,2014,"Owen","M")+" if she was born in 2014.");
+        //System.out.println(yearOfHighestRank("Mich","M"));
+        //System.out.println(getAverageRank("Robert","M"));
+        //System.out.println(getTotalBirthsRankedHigher("Drew","M",1990));
     }
 }
